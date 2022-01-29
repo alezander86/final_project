@@ -16,7 +16,7 @@ pipeline {
 				echo 'Terraform Init V1g'
 			 }
 	    }
-	    stage('Terraform Init'){
+/*	    stage('Terraform Init'){
 		     steps{
 				sh label: '', script: 'terraform init'
 			 }
@@ -27,6 +27,6 @@ pipeline {
 			 }
 	    }
 	
-	}
+*/	}
 	
 }
