@@ -11,10 +11,14 @@ pipeline {
             terraform 'terraform'
 		}
 	stages {
+		stage('Terraform Init'){
+		     steps{
+				echo 'Terraform Init V1g'
+			 }
+	    }
 	    stage('Terraform Init'){
 		     steps{
-				echo 'Terraform Init V1'
-			    sh label: '', script: 'terraform init'
+				sh label: '', script: 'terraform init'
 			 }
 	    }
 		stage('Terraform apply'){
