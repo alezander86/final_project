@@ -1,5 +1,4 @@
-provider "aws" {
-   region     = "eu-central-1"
+provider "aws" {   
 }
 #resource "aws_eip_association" "eip_assoc" {
 #  instance_id   = aws_instance.ubuntu_webserver.id
@@ -142,13 +141,4 @@ resource "aws_security_group" "allowed" {
         protocol = -1
         cidr_blocks = ["0.0.0.0/0"]
       }
-}
-
-data "aws_ami" "latest_ubuntu" {
-  owners = ["099720109477"]
-  most_recent = true
-  filter {
-    name = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-*-amd64-server-*"]
-  }
 }
