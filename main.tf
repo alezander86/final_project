@@ -1,25 +1,3 @@
-provider "aws" {   
-}
-#resource "aws_eip_association" "eip_assoc" {
-#  instance_id   = aws_instance.ubuntu_webserver.id
-#  allocation_id = "eipalloc-68dfd956"
-#}
-
-#resource "aws_eip_association" "eip_assoc_db" {
-#    instance_id   = aws_instance.ubuntu_webserver_db.id
-#    allocation_id = "eipalloc-a4f37a95"
-#  }
-#resource "aws_eip" "static_ip" {
-#  vpc = true
-#   allocation_id = "eipalloc-68dfd956"
-
-#  instance = aws_instance.ubuntu_webserver.id
-#  associate_with_private_ip = "18.157.53.28"
-
-#  tags = {
-#    Name = "static for web"
-#  }
-#}
 resource "aws_instance" "ubuntu_webserver_db" {
   ami                    = "${data.aws_ami.latest_ubuntu.id}"
   instance_type          = "t2.micro"
@@ -75,12 +53,6 @@ resource "aws_instance" "ubuntu_webserver" {
     create_before_destroy = true
   }
 }
-
-#resource "aws_volume_attachment" "ebs_att" {
-#  device_name = "/dev/sdh"
-#  volume_id   = "vol-0d785fa3898b82429"
-#  instance_id = aws_instance.ubuntu_webserver.id
-#}
 
 resource "aws_vpc" "prod-vpc" {
     cidr_block = "10.0.0.0/16"
