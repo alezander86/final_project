@@ -7,16 +7,11 @@ pipeline {
 //        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
 //        TF_IN_AUTOMATION      = '1'
 //    }
-//	tools {
-//            terraform 'terraform'
-//		}
+	tools {
+            terraform 'terraform'
+		}
 	stages {
 		stage('Terraform Init'){
-		     steps{
-				echo 'Terraform Init V1g'
-			 }
-	    }
-/*	    stage('Terraform Init'){
 		     steps{
 				sh label: '', script: 'terraform init'
 			 }
@@ -27,6 +22,6 @@ pipeline {
 			 }
 	    }
 	
-*/	}
+	}
 	
 }
