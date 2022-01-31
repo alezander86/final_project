@@ -15,8 +15,7 @@ pipeline {
 	    }
 		stage('Terraform apply'){
 		     steps{
-				GO(credentials: 'aws-credentials')
-			    sh label: '', script: 'terraform apply -auto-approve'
+				sh label: '', script: 'terraform apply -auto-approve'
 			 }
 	    }
 	
