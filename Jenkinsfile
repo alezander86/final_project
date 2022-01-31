@@ -1,4 +1,8 @@
 pipeline {
+	 environment {
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
     agent any
 	tools {
             terraform 'terraform'
@@ -11,7 +15,7 @@ pipeline {
 	    }
 		stage('Terraform apply'){
 		     steps{
-				withAWS(credentials: 'aws-credentials')
+				GO(credentials: 'aws-credentials')
 			    sh label: '', script: 'terraform apply -auto-approve'
 			 }
 	    }
