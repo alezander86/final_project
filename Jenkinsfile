@@ -9,14 +9,20 @@ pipeline {
 		}
 	stages {
 		stage('Terraform Init'){
-		     steps{
+		    steps{
 				sh label: '', script: 'terraform init'
-			 }
+			}
 	    }
 		stage('Terraform apply'){
-		     steps{
+		    steps{
 				sh label: '', script: 'terraform destroy -auto-approve'
+			script {
+                DEV_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip").trim()
+                PROD_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip_db").trim()
+                }
+                writeFile (file: '../ansible/hosts.txt', text: '[dev]\n' + DEV_IP + '\n' + '[prod]\n' + PROD_IP + '\n')
 			 }
+			 
 	    }
 	
 	}
