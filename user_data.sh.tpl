@@ -2,8 +2,8 @@
 
 #telegram connection
 
-TOKEN=1491687415:AAEY_I8PvbJIDqeNVTtxv0-gtWnikky9jgk
-CHAT_ID=-379506726
+TOKEN=TELEGRAM-TOKEN
+CHAT_ID=TELEGRAM_CHAT_ID
 
 URL="https://api.telegram.org/bot$TOKEN/sendMessage?chat_id=$CHAT_ID"
 URL2="https://api.telegram.org/bot$TOKEN/sendDocument?chat_id=$CHAT_ID"
