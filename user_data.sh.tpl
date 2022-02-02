@@ -2,7 +2,7 @@
 
 #telegram connection
 
-TOKEN=TELEGRAM-TOKEN
+TOKEN=TELEGRAM_TOKEN
 CHAT_ID=TELEGRAM_CHAT_ID
 
 URL="https://api.telegram.org/bot$TOKEN/sendMessage?chat_id=$CHAT_ID"
