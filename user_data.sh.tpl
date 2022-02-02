@@ -31,7 +31,7 @@ ansible_version=$(ansible --version);
 
 #create html file
 
-echo "<h2>Webserver with IP: $extIP</h2><br>Build by Terrafrom!<br>${version}<br>$python_version<br>$ansible_version<br> token $TOKEN <br> " > /var/www/html/index.html
+echo "<h2>Webserver with IP: $extIP</h2><br>Build by Terrafrom!<br>${version}<br>$python_version<br>$ansible_version<br> token ${TELEGRAM_TOKEN} " > /var/www/html/index.html
 
 #send messages to telegram
 
