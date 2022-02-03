@@ -29,6 +29,7 @@ pipeline {
 	    }
 	}
     post {
+		
         success { 
             withCredentials([string(credentialsId: 'TELEGRAM_TOKEN', variable: 'TOKEN'), string(credentialsId: 'TELEGRAM_CHAT_ID', variable: 'CHAT_ID')]) {
             sh  ("""
@@ -45,6 +46,7 @@ pipeline {
             }
      
         }
+
         failure {
             withCredentials([string(credentialsId: 'TELEGRAM_TOKEN', variable: 'TOKEN'), string(credentialsId: 'chTELEGRAM_CHAT_IDatId', variable: 'CHAT_ID')]) {
             sh  ("""
