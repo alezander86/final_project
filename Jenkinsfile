@@ -15,8 +15,8 @@ pipeline {
 	    }
 		stage('Terraform apply'){
 		    steps{
-				//sh label: '', script: 'terraform apply -auto-approve'
-				sh label: '', script: 'terraform destroy -auto-approve'
+				sh label: '', script: 'terraform apply -auto-approve'
+				//sh label: '', script: 'terraform destroy -auto-approve'
 			script {
                 WEB_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip").trim()
                 DB_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip_db").trim()
@@ -31,7 +31,7 @@ pipeline {
         success { 
             withCredentials([string(credentialsId: 'TELEGRAM_TOKEN', variable: 'TOKEN'), string(credentialsId: 'TELEGRAM_CHAT_ID', variable: 'CHAT_ID')]) {
             sh  ("""
-                curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*Build*: ${env.JOB_NAME}* *№*: ${env.BUILD_NUMBER} *Branch*: ${env.GIT_BRANCH} $WEB_IP *Build* : OK *Published* = YES'
+                curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*Build*: ${env.JOB_NAME}* *№*: ${env.BUILD_NUMBER} *Branch*: ${env.GIT_BRANCH} WEB_IP *Build* : OK *Published* = YES'
             """)
             }
         } 
