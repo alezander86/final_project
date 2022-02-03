@@ -2,8 +2,8 @@ pipeline {
 	 environment {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-		TELEGRAM_TOKEN     = credentials('TELEGRAM_TOKEN')
-        TELEGRAM_CHAT_ID = credentials('TELEGRAM_CHAT_ID')
+		//TELEGRAM_TOKEN     = credentials('TELEGRAM_TOKEN')
+        //TELEGRAM_CHAT_ID = credentials('TELEGRAM_CHAT_ID')
     }
     agent any
 	tools {
@@ -27,7 +27,30 @@ pipeline {
 			 }
 			 
 	    }
-	
 	}
+    post {
+        success { 
+            withCredentials([string(credentialsId: 'TELEGRAM_TOKEN', variable: 'TOKEN'), string(credentialsId: 'TELEGRAM_CHAT_ID', variable: 'CHAT_ID')]) {
+            sh  ("""
+                curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*${env.JOB_NAME}* : POC *Branch*: ${env.GIT_BRANCH} *Build* : OK *Published* = YES'
+            """)
+            }
+        } 
+
+        aborted {
+            withCredentials([string(credentialsId: 'TELEGRAM_TOKEN', variable: 'TOKEN'), string(credentialsId: 'TELEGRAM_CHAT_ID', variable: 'CHAT_ID')]) {
+            sh  ("""
+                curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*${env.JOB_NAME}* : POC *Branch*: ${env.GIT_BRANCH} *Build* : `Aborted` *Published* = `Aborted`'
+            """)
+            }
+     
+        }
+        failure {
+            withCredentials([string(credentialsId: 'TELEGRAM_TOKEN', variable: 'TOKEN'), string(credentialsId: 'chTELEGRAM_CHAT_IDatId', variable: 'CHAT_ID')]) {
+            sh  ("""
+                curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*${env.JOB_NAME}* : POC  *Branch*: ${env.GIT_BRANCH} *Build* : `not OK` *Published* = `no`'
+            """)
+            }
+        }   
 	
 }

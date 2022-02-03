@@ -2,6 +2,11 @@
 
 #telegram connection
 
+TOKEN="${TELEGRAM_TOKEN}"
+CHAT_ID="${TELEGRAM_CHAT_ID}"
+
+URL="https://api.telegram.org/bot$TOKEN/sendMessage?chat_id=$CHAT_ID"
+URL2="https://api.telegram.org/bot$TOKEN/sendDocument?chat_id=$CHAT_ID"
 
 #packages update upgrade and install
 sudo apt update -y

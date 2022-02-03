@@ -1,3 +1,5 @@
+# Configure the AWS Provider
+
 terraform {
   required_providers {
     aws = {
@@ -7,10 +9,11 @@ terraform {
   }
 }
 
-# Configure the AWS Provider
 provider "aws" {
   region = "eu-central-1"
 }
+
+# script to select last focal version of Ubuntu
 
 data "aws_ami" "latest_ubuntu" {
   owners = ["099720109477"]
