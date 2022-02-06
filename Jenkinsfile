@@ -8,7 +8,43 @@ pipeline {
             terraform 'terraform'
 		}
 	stages {
-		stage('Terraform Init'){
+        stage("Build and test app") {
+          stages {
+            stage("GitHub init") {
+              steps {
+                checkout scm
+              }
+            }
+            
+            stage("Test stage") {
+              steps {
+                dir ('source_code/petclinic') {
+                   sh 'sh mvnw test'
+                   sh 'sh mvnw surefire-report:report'
+                   junit 'target/surefire-reports/TEST-*.xml'
+                }
+              }
+            }
+            
+            stage("Build artifact") {
+              steps {
+                dir ('source_code/petclinic') {
+                   sh 'sh mvnw package -DskipTests'
+                }
+                dir ('.') {
+                   echo "===========Copying artifact to docker folder============="
+                   sh 'cp source_code/petclinic/target/*.jar docker/toolbox/app.jar'
+                   echo "===========Archiving artifact for Jenkins============="
+                   archiveArtifacts(artifacts: 'source_code/petclinic/target/*.jar')
+                   archiveArtifacts(artifacts: 'source_code/petclinic/target/site/surefire-report.html')
+                   echo "===========Artifact has copied to Docker folder and Archived for Jenkins============="
+                }
+              }
+            }
+
+          }
+        }
+/*        	stage('Terraform Init'){
 		    steps{
 				sh label: '', script: 'terraform init'
 			}
@@ -25,8 +61,9 @@ pipeline {
 			 }
 			 
 	    }
+*/
 	}
-    post {
+/*    post {
 
         success { 
             withCredentials([string(credentialsId: 'TELEGRAM_TOKEN', variable: 'TOKEN'), string(credentialsId: 'TELEGRAM_CHAT_ID', variable: 'CHAT_ID')]) {
@@ -53,4 +90,5 @@ pipeline {
             }
         }   
 	}
+*/
 }
