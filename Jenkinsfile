@@ -19,34 +19,22 @@ pipeline {
                    junit 'target/surefire-reports/TEST-*.xml'
                 }
               }
-            }
-
-            
-/*            stage("Test stage") {
-              steps {
-                dir ('source_code/petclinic') {
-                   sh 'sh mvnw test'
-                   sh 'sh mvnw surefire-report:report'
-                   junit 'target/surefire-reports/TEST-*.xml'
-                }
-              }
-            }
-            
+            }        
             stage("Build artifact") {
               steps {
-                dir ('source_code/petclinic') {
+                dir ('petclinic') {
                    sh 'sh mvnw package -DskipTests'
                 }
                 dir ('.') {
                    echo "===========Copying artifact to docker folder============="
-                   sh 'cp source_code/petclinic/target/*.jar docker/toolbox/app.jar'
+                   sh 'cp petclinic/target/*.jar docker/toolbox/app.jar'
                    echo "===========Archiving artifact for Jenkins============="
-                   archiveArtifacts(artifacts: 'source_code/petclinic/target/*.jar')
-                   archiveArtifacts(artifacts: 'source_code/petclinic/target/site/surefire-report.html')
+                   archiveArtifacts(artifacts: 'petclinic/target/*.jar')
+                   archiveArtifacts(artifacts: 'petclinic/target/site/surefire-report.html')
                    echo "===========Artifact has copied to Docker folder and Archived for Jenkins============="
                 }
               }
-*/            }
+            }
 
           }
         }
