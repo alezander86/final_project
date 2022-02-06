@@ -8,7 +8,7 @@ pipeline {
             terraform 'terraform'
             maven '3.8.4'
 		}
-	stages {
+	stage ('Build Artifact'){
         steps {
             sh 'mvn clean'
                 script {
