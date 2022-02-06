@@ -6,15 +6,13 @@ pipeline {
     agent any
 	tools {
             terraform 'terraform'
-            //maven '3.8.4'
+            maven '3.8.4'
 		}
 	stages {
         stage("Build and test app") {
           stages {
             stage("GitHub init") {
               steps {
-                sh "mvn -version"
-                sh "mvn clean install"
                 checkout scm
               }
             }
