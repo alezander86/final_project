@@ -21,7 +21,7 @@ pipeline {
               }
             }
             
-            stage("Test stage") {
+/*            stage("Test stage") {
               steps {
                 dir ('source_code/petclinic') {
                    sh 'sh mvnw test'
@@ -45,7 +45,7 @@ pipeline {
                    echo "===========Artifact has copied to Docker folder and Archived for Jenkins============="
                 }
               }
-            }
+*/            }
 
           }
         }
