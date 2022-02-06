@@ -16,7 +16,7 @@ pipeline {
                 dir ('petclinic') {
                    sh 'sh mvnw test'
                    sh 'sh mvnw surefire-report:report'
-                   junit 'target/TEST-*.xml'
+                   junit 'target/surefire-reports/TEST-*.xml'
                 }
               }
             }        
@@ -26,15 +26,15 @@ pipeline {
                    sh 'sh mvnw package -DskipTests'
                 }
                 dir ('.') {
-                   echo "===========Copying artifact to docker folder============="
+                   echo "Copying artifact to root folder"
                    sh 'cp petclinic/target/*.jar app.jar'
-                   echo "===========Archiving artifact for Jenkins============="
+                   echo "Archiving artifact"
                    archiveArtifacts(artifacts: 'petclinic/target/*.jar')
                    archiveArtifacts(artifacts: 'petclinic/target/site/surefire-report.html')
-                   echo "===========Artifact has copied to Docker folder and Archived for Jenkins============="
                 }
               }
             }
+
           }
         }
 /*        	stage('Terraform Init'){
