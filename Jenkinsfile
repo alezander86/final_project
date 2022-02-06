@@ -11,14 +11,18 @@ pipeline {
 	stages {
         stage("Build and test app") {
           stages {
+
             stage("GitHub init") {
-              steps {
-                sh 'mvn clean'
-                    script {
-                        pom = readMavenPom file: 'petclinic/pom.xml'
-                        getArtifact(pom.groupId, pom.artifactId, pom.version, 'petclinic')
+                steps {
+                    sh 'mvn clean'
+                        script {
+                         dir ('source_code/spring-petclinic'){
+                        
+                            pom = readMavenPom file: 'petclinic/pom.xml'
+                            getArtifact(pom.groupId, pom.artifactId, pom.version, 'petclinic')
+                        }
                     }
-              }
+                }
             }
             
 /*            stage("Test stage") {
