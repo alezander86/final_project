@@ -13,12 +13,9 @@ pipeline {
           stages {
             stage("GitHub init") {
               steps {
-                sh 'mvn clean'
-                script {
-                    pom = readMavenPom file: 'pom.xml'
-                    getArtifact(pom.groupId, pom.artifactId, pom.version, 'petclinic')
-                }
-            }
+                sh "mvn -version"
+                sh "mvn clean install"
+                checkout scm
               }
             }
             
@@ -68,7 +65,7 @@ pipeline {
 			 
 	    }
 */
-	//}
+	}
 /*    post {
 
         success { 
