@@ -9,15 +9,12 @@ pipeline {
             maven '3.8.4'
 		}
 	stages {
-        stage("Build and test app") {
-          stages {
-            stage("GitHub init") {
-              steps {
-                sh 'mvn clean'
-                    script {
-                        pom = readMavenPom file: 'pom.xml'
-                        getArtifact(pom.groupId, pom.artifactId, pom.version, 'petclinic')
-              }
+        steps {
+            sh 'mvn clean'
+                script {
+                    pom = readMavenPom file: 'pom.xml'
+                    getArtifact(pom.groupId, pom.artifactId, pom.version, 'petclinic')
+                }
             }
 /*        	stage('Terraform Init'){
 		    steps{
