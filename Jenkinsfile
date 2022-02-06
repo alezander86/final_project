@@ -16,7 +16,7 @@ pipeline {
                 dir ('petclinic') {
                    sh 'sh mvnw test'
                    sh 'sh mvnw surefire-report:report'
-                   junit 'target/surefire-reports/TEST-*.xml'
+                   junit 'target/TEST-*.xml'
                 }
               }
             }        
