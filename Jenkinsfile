@@ -3,7 +3,7 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
-    agent any { docker {image 'maven:3.8.4'} }
+    agent any { docker {image 'maven:3.8.4'} 
     }
 	tools {
             terraform 'terraform'
