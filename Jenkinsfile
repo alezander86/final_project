@@ -8,14 +8,48 @@ pipeline {
             terraform 'terraform'
             maven '3.8.4'
 		}
-	stage ('Build Artifact'){
-        steps {
-            sh 'mvn clean'
+	stages {
+        stage("Build and test app") {
+          stages {
+            stage("GitHub init") {
+              steps {
+                sh 'mvn clean'
                 script {
                     pom = readMavenPom file: 'pom.xml'
                     getArtifact(pom.groupId, pom.artifactId, pom.version, 'petclinic')
                 }
             }
+              }
+            }
+            
+            stage("Test stage") {
+              steps {
+                dir ('source_code/petclinic') {
+                   sh 'sh mvnw test'
+                   sh 'sh mvnw surefire-report:report'
+                   junit 'target/surefire-reports/TEST-*.xml'
+                }
+              }
+            }
+            
+            stage("Build artifact") {
+              steps {
+                dir ('source_code/petclinic') {
+                   sh 'sh mvnw package -DskipTests'
+                }
+                dir ('.') {
+                   echo "===========Copying artifact to docker folder============="
+                   sh 'cp source_code/petclinic/target/*.jar docker/toolbox/app.jar'
+                   echo "===========Archiving artifact for Jenkins============="
+                   archiveArtifacts(artifacts: 'source_code/petclinic/target/*.jar')
+                   archiveArtifacts(artifacts: 'source_code/petclinic/target/site/surefire-report.html')
+                   echo "===========Artifact has copied to Docker folder and Archived for Jenkins============="
+                }
+              }
+            }
+
+          }
+        }
 /*        	stage('Terraform Init'){
 		    steps{
 				sh label: '', script: 'terraform init'
