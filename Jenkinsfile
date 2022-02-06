@@ -6,7 +6,7 @@ pipeline {
     agent any
 	tools {
             terraform 'terraform'
-            maven '3.8.4'
+            //maven '3.8.4'
 		}
 	stages {
         stage("Build and test app") {
