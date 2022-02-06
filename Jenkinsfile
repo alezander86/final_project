@@ -27,7 +27,7 @@ pipeline {
                 }
                 dir ('.') {
                    echo "===========Copying artifact to docker folder============="
-                   sh 'cp petclinic/target/*.jar docker/toolbox/app.jar'
+                   sh 'cp petclinic/target/*.jar app.jar'
                    echo "===========Archiving artifact for Jenkins============="
                    archiveArtifacts(artifacts: 'petclinic/target/*.jar')
                    archiveArtifacts(artifacts: 'petclinic/target/site/surefire-report.html')
@@ -35,7 +35,6 @@ pipeline {
                 }
               }
             }
-
           }
         }
 /*        	stage('Terraform Init'){
