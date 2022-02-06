@@ -13,6 +13,8 @@ pipeline {
           stages {
             stage("GitHub init") {
               steps {
+                sh "mvn -version"
+                sh "mvn clean install"
                 checkout scm
               }
             }
