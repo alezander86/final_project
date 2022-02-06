@@ -3,10 +3,11 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
-    agent any
+    agent any { docker {image 'maven:3.8.4'} }
+    }
 	tools {
             terraform 'terraform'
-            maven '3.8.4'
+//          maven '3.8.4'
 		}
 	stages {
         stage("Build and test app") {
@@ -20,7 +21,7 @@ pipeline {
                 }
               }
             }        
-            stage("Build artifact") {
+            stage("Build and prepare artifact") {
               steps {
                 dir ('petclinic') {
                    sh 'sh mvnw package -DskipTests'
