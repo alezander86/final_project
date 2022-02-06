@@ -16,9 +16,8 @@ pipeline {
                 steps {
                     sh 'mvn clean'
                         script {
-                         dir ('source_code/spring-petclinic'){
-                        
-                            pom = readMavenPom file: 'petclinic/pom.xml'
+                         dir ('petclinic'){
+                            pom = readMavenPom file: 'pom.xml'
                             getArtifact(pom.groupId, pom.artifactId, pom.version, 'petclinic')
                         }
                     }
