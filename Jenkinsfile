@@ -16,7 +16,7 @@ pipeline {
                 steps {
                     sh 'mvn clean'
                         script {
-                         dir ('petclinic'){
+                         dir ('../petclinic') {
                             pom = readMavenPom file: 'pom.xml'
                             getArtifact(pom.groupId, pom.artifactId, pom.version, 'petclinic')
                         }
