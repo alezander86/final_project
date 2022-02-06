@@ -11,18 +11,16 @@ pipeline {
 	stages {
         stage("Build and test app") {
           stages {
-
-            stage("GitHub init") {
-                steps {
-                    sh 'mvn clean'
-                        script {
-                         dir ('../petclinic') {
-                            pom = readMavenPom file: 'pom.xml'
-                            getArtifact(pom.groupId, pom.artifactId, pom.version, 'petclinic')
-                        }
-                    }
+            stage("testing stage") {
+              steps {
+                dir ('petclinic') {
+                   sh 'sh mvnw test'
+                   sh 'sh mvnw surefire-report:report'
+                   junit 'target/surefire-reports/TEST-*.xml'
                 }
+              }
             }
+
             
 /*            stage("Test stage") {
               steps {
