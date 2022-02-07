@@ -3,11 +3,11 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
-    agent { docker {image 'maven:3.8.4'} 
+    agent { docker {image 'maven'} 
     }
 	tools {
             terraform 'terraform'
-////          maven '3.8.4'
+//          maven '3.8.4'
 		}
 	stages {
         stage("Build and test app") {
