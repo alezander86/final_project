@@ -6,7 +6,6 @@ pipeline {
     agent { 
         docker {
             image 'maven'
-            args '-v $HOME:/home'
             } 
     }
 	tools {
