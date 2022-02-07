@@ -6,7 +6,7 @@ pipeline {
     agent { 
         docker {
             image 'maven'
-            args '-v $HOME:/home/jenkins'
+            args '-v $HOME:/home'
             } 
     }
 	tools {
