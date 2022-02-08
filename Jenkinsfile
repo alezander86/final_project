@@ -1,23 +1,27 @@
 pipeline {
-    agent any 
+    agent any
     stages {
-        stage('Build') { 
+        stage("build"){
+
             steps {
-                sh 'date' 
+                echo 'build the application'
+            }
+        }    
+        stage("test"){
+
+            steps {
+                echo 'testing the application'
             }
         }
-        stage('Test') { 
+
+        stage("deploy"){
+
             steps {
-                sh 'date'
-            }
-        }
-        stage('Deploy') { 
-            steps {
-                sh 'sh date'
+                echo 'deploy the application'
             }
         }
     }
-}
+} 
 /*pipeline {
 	 environment {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
