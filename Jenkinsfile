@@ -30,7 +30,7 @@ pipeline {
             } 
         }
     */
-	tools {
+	/*tools {
             terraform 'terraform'
             maven '3.8.4'
 		}
