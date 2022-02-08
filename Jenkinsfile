@@ -10,10 +10,10 @@ pipeline {
             } 
         }
     */
-	tools {
+/*	tools {
             terraform 'terraform'
             maven '3.8.4'
-		}
+*/		}
 	stages {
         stage("Build and test app") {
           stages {
@@ -43,7 +43,7 @@ pipeline {
 
           }
         }
-        	stage('Terraform Init'){
+/*  stage('Terraform Init'){
 		    steps{
 				sh label: '', script: 'terraform init'
 			}
@@ -87,6 +87,7 @@ pipeline {
                 curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*Build*: ${env.JOB_NAME} *№*: ${env.BUILD_NUMBER} *Branch*: ${env.GIT_BRANCH} *Build* : `not OK` *Published* = `no`'
             """)
             }
-        }   
+        } 
+*/  
 	}
 }
