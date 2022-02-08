@@ -43,7 +43,7 @@ pipeline {
 
           }
         }
-/*        	stage('Terraform Init'){
+        	stage('Terraform Init'){
 		    steps{
 				sh label: '', script: 'terraform init'
 			}
@@ -60,9 +60,9 @@ pipeline {
 			 }
 			 
 	    }
-*/
+
 	}
-/*    post {
+    post {
 
         success { 
             withCredentials([string(credentialsId: 'TELEGRAM_TOKEN', variable: 'TOKEN'), string(credentialsId: 'TELEGRAM_CHAT_ID', variable: 'CHAT_ID')]) {
@@ -89,5 +89,5 @@ pipeline {
             }
         }   
 	}
-*/
+
 }

@@ -3,13 +3,7 @@
 #packages update upgrade and install
 sudo apt update -y
 sudo apt upgrade -y
-sudo apt install nginx -y
-sudo apt install curl -y
-sudo apt install wget -y
-sudo apt install python3 -y
-sudo apt install python3-pip -y
-sudo pip install ansible
-sudo apt install tree -y
+sudo pip install ansible -y
 
 
 disk=$(lsblk)
