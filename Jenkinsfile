@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Deploy') { 
             steps {
-                sh 'date'
+                sh 'sh date'
             }
         }
     }
