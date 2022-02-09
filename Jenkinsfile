@@ -14,7 +14,7 @@ pipeline {
             terraform 'terraform'
             maven '3.8.4'
 		}
-/*	stages {
+	/* stages {
         stage("Build and test app") {
           stages {
             stage("testing stage") {
@@ -61,7 +61,7 @@ pipeline {
 			 
 	    }
 
-*/	}
+	}*/
     post {
 
         success { 
@@ -90,4 +90,4 @@ pipeline {
         }   
 	}
 
-/*}
+}
