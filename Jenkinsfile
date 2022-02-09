@@ -58,7 +58,7 @@ pipeline {
                 WEB_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip").trim()
                 DB_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip_db").trim()
                 }
-                writeFile (file: '../ansible/hosts.txt', text: '[web]\n' + WEB_IP + '\n' + '[db]\n' + DB_IP + '\n')
+                writeFile (file: '../${env.JOB_NAME}/Ansible/hosts.txt', text: '[web]\n' + WEB_IP )
 			    }
 			 
 	      }
