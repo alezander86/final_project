@@ -1,0 +1,11 @@
+- name: Copy app and starting app
+  hosts: app
+  become: yes
+   tasks:
+  - name: Update and upgrade apt packages
+    apt:
+      update_cache: yes
+      cache_valid_time: 86400 
+  
+  - name: Install Docker
+    apt: name=openjdk-8-jre state=latest

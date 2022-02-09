@@ -2,7 +2,7 @@ pipeline {
 	 environment {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-        WEB_IP = ''
+        APP_IP = ''
         THEJOB="${JOB_NAME.substring(JOB_NAME.lastIndexOf('/') + 1, JOB_NAME.length())}"
     }
     agent any  /*{
@@ -16,7 +16,7 @@ pipeline {
             terraform 'terraform'
             maven '3.8.4'
 		}
-  stages {
+    stages {
         stage("Build and test app") {
           stages {
             stage("testing stage") {
@@ -56,20 +56,30 @@ pipeline {
 			   	  //sh label: '', script: 'terraform destroy -auto-approve'
 			    
             script {
-                WEB_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip").trim()
-                //DB_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip_db").trim()
+                APP_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip").trim()
                 }
-                writeFile (file: '../'+ THEJOB +'/Ansible/hosts.txt', text: '[web]\n' + WEB_IP )
+                writeFile (file: '../ansible/hosts.txt', text: '[app]\n' + APP_IP '\n')
 			    }
 			 
 	      }
 
-	  }
+	      stage('App environment configuring with ansible') {
+          steps {
+            dir ('ansible') {
+              sh 'echo now you are in the'
+              sh 'pwd'
+              sh 'ansible-playbook app.yml'
+            }
+          }
+        }
+      }
+
+
     post {
      success { 
         withCredentials([string(credentialsId: 'telegram_token', variable: 'TOKEN'), string(credentialsId: 'telegram_chat_id', variable: 'CHAT_ID')]) {
         sh  ("""
-            curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*${env.JOB_NAME}* : POC *Branch*: ${env.GIT_BRANCH} $WEB_IP *Build* : OK *Published* = YES'
+            curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*${env.JOB_NAME}* : POC *Branch*: ${env.GIT_BRANCH} $APP_IP *Build* : OK *Published* = YES'
         """)
         }
      }

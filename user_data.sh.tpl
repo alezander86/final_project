@@ -6,5 +6,5 @@ sudo apt upgrade -y
 sudo apt install python3 -y
 sudo pip install ansible -y
 
-sudo apt install openjdk-8-jre -y
+#sudo apt install openjdk-8-jre -y
 
