@@ -15,6 +15,7 @@ pipeline {
 	  tools {
             terraform 'terraform'
             maven '3.8.4'
+            ansible 'ansible'
 		}
     stages {
         stage("Build and test app") {
