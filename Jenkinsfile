@@ -45,8 +45,8 @@ pipeline {
         }
     stage('Terraform Init'){
 		    steps{
-				sh label: '', script: 'terraform init'
-			}
+				  sh label: '', script: 'terraform init'
+			  }
 	    }
 		stage('Terraform apply'){
 		    steps{
