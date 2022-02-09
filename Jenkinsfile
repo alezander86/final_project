@@ -65,7 +65,7 @@ pipeline {
     post {
 
         success { 
-            withCredentials([string(credentialsId: 'TELEGRAM_TOKEN', variable: 'TOKEN'), string(credentialsId: 'TELEGRAM_CHAT_ID', variable: 'CHAT_ID')]) {
+            withCredentials([string(credentialsId: 'telegram_token', variable: 'TOKEN'), string(credentialsId: 'telegram_chat_id', variable: 'CHAT_ID')]) {
 			sh  ("""
                 curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*Build*: ${env.JOB_NAME} *№*: ${env.BUILD_NUMBER} *Branch*: ${env.GIT_BRANCH} $WEB_IP *Build* : OK *Published* = YES'
             """)
@@ -73,7 +73,7 @@ pipeline {
         } 
 
         aborted {
-            withCredentials([string(credentialsId: 'TELEGRAM_TOKEN', variable: 'TOKEN'), string(credentialsId: 'TELEGRAM_CHAT_ID', variable: 'CHAT_ID')]) {
+            withCredentials([string(credentialsId: 'telegram_token', variable: 'TOKEN'), string(credentialsId: 'telegram_chat_id', variable: 'CHAT_ID')]) {
             sh  ("""
                 curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*Build*: ${env.JOB_NAME} *№*: ${env.BUILD_NUMBER} *Branch*: ${env.GIT_BRANCH} *Build* : `Aborted` *Published* = `Aborted`'
             """)
@@ -82,11 +82,12 @@ pipeline {
         }
 
         failure {
-            withCredentials([string(credentialsId: 'TELEGRAM_TOKEN', variable: 'TOKEN'), string(credentialsId: 'TELEGRAM_CHAT_ID', variable: 'CHAT_ID')]) {
+            withCredentials([string(credentialsId: 'telegram_token', variable: 'TOKEN'), string(credentialsId: 'telegram_chat_id', variable: 'CHAT_ID')]) {
             sh  ("""
                 curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*Build*: ${env.JOB_NAME} *№*: ${env.BUILD_NUMBER} *Branch*: ${env.GIT_BRANCH} *Build* : `not OK` *Published* = `no`'
             """)
             }
         }   
 	}
+  
 }
