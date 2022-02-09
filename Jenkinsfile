@@ -3,6 +3,7 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         WEB_IP = ''
+        THEJOB="${JOB_NAME.substring(JOB_NAME.lastIndexOf('/') + 1, JOB_NAME.length())}"
     }
     agent any  /*{
         docker {
@@ -58,7 +59,7 @@ pipeline {
                 WEB_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip").trim()
                 //DB_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip_db").trim()
                 }
-                writeFile (file: '../'+ currentJob.getName() +'/Ansible/hosts.txt', text: '[web]\n' + WEB_IP )
+                writeFile (file: '../'+ THEJOB +'/Ansible/hosts.txt', text: '[web]\n' + WEB_IP )
 			    }
 			 
 	      }
