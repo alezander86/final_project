@@ -3,7 +3,7 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         WEB_IP = ''
-        JOB_NAME = ${env.JOB_NAME}
+        JOB_NAME = return ['ITEM_NAME': currentJob.getName()]
     }
     agent any  /*{
         docker {
