@@ -14,7 +14,7 @@ pipeline {
             terraform 'terraform'
             maven '3.8.4'
 		}
-	stages {
+/*	stages {
         stage("Build and test app") {
           stages {
             stage("testing stage") {
@@ -42,13 +42,13 @@ pipeline {
             }
 
           }
-        }
+        }*/
     stage('Terraform Init'){
 		    steps{
 				  sh label: '', script: 'terraform init'
 			  }
 	    }
-		stage('Terraform apply'){
+		/*stage('Terraform apply'){
 		    steps{
 				//sh label: '', script: 'terraform apply -auto-approve'
 				sh label: '', script: 'terraform destroy -auto-approve'
@@ -61,7 +61,7 @@ pipeline {
 			 
 	    }
 
-	}
+*/	}
     post {
 
         success { 
@@ -89,5 +89,5 @@ pipeline {
             }
         }   
 	}
-  
+
 }
