@@ -51,8 +51,8 @@ pipeline {
 	      }
 	    	stage('Terraform apply'){
 		      steps{
-				    //sh label: '', script: 'terraform apply -auto-approve'
-			   	  sh label: '', script: 'terraform destroy -auto-approve'
+				    sh label: '', script: 'terraform apply -auto-approve'
+			   	  //sh label: '', script: 'terraform destroy -auto-approve'
 			    
             script {
                 WEB_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip").trim()
