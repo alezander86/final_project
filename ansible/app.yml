@@ -19,7 +19,7 @@
         dest: /home/user/
 
   - name: Stop jar
-    shell: java -jar /home/user/app.jar stop
+    shell: nohup java -jar /home/user/app.jar stop &
 
   - name: Start jar
     shell: nohup java -jar /home/user/app.jar &
