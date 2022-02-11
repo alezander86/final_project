@@ -4,18 +4,10 @@
 #  value = aws_eip_association.eip_assoc.public_ip
 #}
 
-#output "Webserver_public_ip_db" {
-#  value = aws_eip_association.eip_assoc_db.public_ip
-#}
-
 #automate dynamic public_ip
 
 output "Webserver_public_ip" {
   value = aws_instance.ubuntu_webserver.public_ip
-}
-
-output "Webserver_public_ip_db" {
-  value = aws_instance.ubuntu_webserver_db.public_ip
 }
 
 #automate dynamic private_ip
@@ -24,16 +16,8 @@ output "Webserver_private_ip" {
   value = aws_instance.ubuntu_webserver.private_ip
 }
 
-output "Webserver_private_ip_db" {
-  value = aws_instance.ubuntu_webserver_db.private_ip
-}
-
 output "Webserver_id" {
   value = "${aws_instance.ubuntu_webserver.id}"
-}
-
-output "Webserverdb_id" {
-  value = "${aws_instance.ubuntu_webserver_db.id}"
 }
 
 # vpc id
