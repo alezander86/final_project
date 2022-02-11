@@ -13,7 +13,7 @@
     apt: name=openjdk-8-jre state=latest
 
   - name: copying file with playbook
-      become: true 
+    become: true 
       copy:
         src: /var/lib/jenkins/workspace/final_project/app.jar
         dest: /home/user/
