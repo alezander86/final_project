@@ -1,3 +1,31 @@
+resource "aws_instance" "ubuntu_webserver_db" {
+  ami                    = "${data.aws_ami.latest_ubuntu.id}"
+  instance_type          = "t2.micro"
+# VPC
+  subnet_id              = "${aws_subnet.prod-subnet-public-1.id}"
+# Security Group
+  vpc_security_group_ids = ["${aws_security_group.allowed.id}"]
+  key_name               = "frankfurt-eu-central-1-key2"
+
+  user_data              = templatefile("user_data.sh.tpl",{
+    version              = "version 1.1"
+    })
+
+    ebs_block_device {
+      device_name = "/dev/sda1"
+      volume_size = 10
+      volume_type = "gp2"
+    }
+
+  tags = {
+    Name = "nginx server"
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 resource "aws_instance" "ubuntu_webserver" {
   ami                    = "${data.aws_ami.latest_ubuntu.id}"
   instance_type          = "t2.micro"
@@ -10,7 +38,7 @@ resource "aws_instance" "ubuntu_webserver" {
   user_data              = templatefile("user_data.sh.tpl",{
     version              = "version 1.1"
     })
-# Configurate instance
+
     ebs_block_device {
       device_name = "/dev/sda1"
       volume_size = 10
