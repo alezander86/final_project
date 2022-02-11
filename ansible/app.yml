@@ -17,6 +17,9 @@
     copy:
         src: /var/lib/jenkins/workspace/final_project/app.jar
         dest: /home/user/
-  
+
+  - name: Stop jar
+    shell: java -jar /home/user/app.jar stop
+
   - name: Start jar
     shell: nohup java -jar /home/user/app.jar &
