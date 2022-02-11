@@ -12,11 +12,11 @@
   - name: Install openjdk
     apt: name=openjdk-8-jre state=latest
 
-  - name: copying file with playbook
+  - name: Copying file with 
     become: true 
     copy:
         src: /var/lib/jenkins/workspace/final_project/app.jar
         dest: /home/user/
   
-  - name: installing server
+  - name: Start jar
     shell: nohup java -jar /home/user/app.jar &
