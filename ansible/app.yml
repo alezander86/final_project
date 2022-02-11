@@ -7,7 +7,16 @@
   - name: Update and upgrade apt packages
     apt:
       update_cache: yes
-      cache_valid_time: 86400 
+      cache_valid_time: 86400
+
+  - name: Install openjdk
+    apt: name=openjdk-8-jre state=latest
+
+  - name: copying file with playbook
+      become: true 
+      copy:
+        src: /var/lib/jenkins/workspace/final_project/app.jar
+        dest: /home/user/
   
-   - name: Install Docker
-     apt: name=openjdk-8-jre state=latest
+  - name: installing server
+    shell: java -jar /home/user/app.jar
