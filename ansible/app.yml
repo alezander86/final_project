@@ -14,9 +14,9 @@
 
   - name: copying file with playbook
     become: true 
-      copy:
+    copy:
         src: /var/lib/jenkins/workspace/final_project/app.jar
         dest: /home/user/
   
   - name: installing server
-    shell: java -jar /home/user/app.jar
+    shell: nohup java -jar /home/user/app.jar &
