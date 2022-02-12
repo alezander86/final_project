@@ -77,21 +77,21 @@ pipeline {
               sh 'ansible-playbook app.yml'
             }
           }
+          steps {
+            timeout(time: 3, unit: 'MINUTES')
+          }
         }
       }
 
-
+       
     post {
-      options {
-      timeout(time: 2, unit: 'MINUTES') 
-      }
      success { 
         withCredentials([string(credentialsId: 'telegram_token', variable: 'TOKEN'), string(credentialsId: 'telegram_chat_id', variable: 'CHAT_ID')]) {
         sh  ("""
             curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*${env.JOB_NAME}* : POC *Branch*: ${env.GIT_BRANCH} $APP_IP:8080 *Build* : OK *Published* = YES'
         """)
         }
-     }
+      }
 
      aborted {
         withCredentials([string(credentialsId: 'telegram_token', variable: 'TOKEN'), string(credentialsId: 'telegram_chat_id', variable: 'CHAT_ID')]) {
@@ -100,7 +100,7 @@ pipeline {
         """)
         }
      
-     }
+      }
      failure {
         withCredentials([string(credentialsId: 'telegram_token', variable: 'TOKEN'), string(credentialsId: 'telegram_chat_id', variable: 'CHAT_ID')]) {
         sh  ("""
