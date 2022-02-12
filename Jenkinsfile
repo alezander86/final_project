@@ -11,6 +11,7 @@ pipeline {
             } 
         }
     */
+    
 	  tools {
           terraform 'terraform'
           maven '3.8.4'
@@ -41,23 +42,23 @@ pipeline {
                 }
               }
             }
-
           }
         }
+        // AWS provider init
         stage('Terraform Init'){
 		      steps{
             checkout scm
             dir ('terraform') {
 				    sh label: '', script: 'terraform init'
-		  	                      }
-	            }
+		  	    }
+	        }
         }
 	    	stage('Terraform apply'){
           steps{
             checkout scm
             dir ('terraform') {
-				      //sh label: '', script: 'terraform apply -auto-approve'
-			   	    sh label: '', script: 'terraform destroy -auto-approve'
+				      sh label: '', script: 'terraform apply -auto-approve'
+			   	    //sh label: '', script: 'terraform destroy -auto-approve'
 			    
             script {
                 APP_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip").trim()
@@ -84,7 +85,7 @@ pipeline {
      success { 
         withCredentials([string(credentialsId: 'telegram_token', variable: 'TOKEN'), string(credentialsId: 'telegram_chat_id', variable: 'CHAT_ID')]) {
         sh  ("""
-            curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*${env.JOB_NAME}* : POC *Branch*: ${env.GIT_BRANCH} $APP_IP *Build* : OK *Published* = YES'
+            curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*${env.JOB_NAME}* : POC *Branch*: ${env.GIT_BRANCH} $APP_IP:8080 *Build* : OK *Published* = YES'
         """)
         }
      }
