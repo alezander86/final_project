@@ -3,7 +3,6 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         APP_IP = ''
-        THEJOB="${JOB_NAME.substring(JOB_NAME.lastIndexOf('/') + 1, JOB_NAME.length())}"
     }
     agent any  /*{
         docker {
@@ -54,9 +53,9 @@ pipeline {
 	            }
         }
 	    	stage('Terraform apply'){
+          steps{
             checkout scm
             dir ('terraform') {
-		      steps{
 				      //sh label: '', script: 'terraform apply -auto-approve'
 			   	    sh label: '', script: 'terraform destroy -auto-approve'
 			    
