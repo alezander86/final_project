@@ -82,6 +82,9 @@ pipeline {
 
 
     post {
+      options {
+      timeout(time: 2, unit: 'MINUTES') 
+      }
      success { 
         withCredentials([string(credentialsId: 'telegram_token', variable: 'TOKEN'), string(credentialsId: 'telegram_chat_id', variable: 'CHAT_ID')]) {
         sh  ("""
