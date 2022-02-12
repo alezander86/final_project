@@ -11,11 +11,12 @@ pipeline {
             } 
         }
     */
-    
+    //used tools
 	  tools {
           terraform 'terraform'
           maven '3.8.4'
 		}
+    // 
     stages {
         stage("Build and test app") {
           stages {
@@ -44,7 +45,7 @@ pipeline {
             }
           }
         }
-        // AWS provider init
+        //AWS provider init
         stage('Terraform Init'){
 		      steps{
             checkout scm
@@ -57,8 +58,8 @@ pipeline {
           steps{
             checkout scm
             dir ('terraform') {
-				      sh label: '', script: 'terraform apply -auto-approve'
-			   	    //sh label: '', script: 'terraform destroy -auto-approve'
+				      //sh label: '', script: 'terraform apply -auto-approve'
+			   	    sh label: '', script: 'terraform destroy -auto-approve'
 			    
             script {
                 APP_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip").trim()
@@ -76,15 +77,14 @@ pipeline {
             }
           }
         }
-
-        stage('timeout'){
+      
+        stage('Timeout to start app with message'){
           steps {
-            timeout(time: 3, unit: 'MINUTES'){
-              sh 'echo timeout 3 min'
+            timeout(time: 2, unit: 'MINUTES'){
+              sh 'echo timeout 2 min'
             }
           }
         }
-
       }
 
        
