@@ -72,8 +72,6 @@ pipeline {
 	      stage('App environment configuring with ansible') {
           steps {
             dir ('ansible') {
-              sh 'echo now you are in the'
-              sh 'pwd'
               sh 'ansible-playbook app.yml'
             }
           }
@@ -81,7 +79,9 @@ pipeline {
 
         stage('timeout'){
           steps {
-            timeout(time: 3, unit: 'MINUTES')
+            timeout(time: 3, unit: 'MINUTES'){
+              sh 'echo timeout 3 min'
+            }
           }
         }
 
