@@ -6,11 +6,8 @@
   tasks:
   - name: Install openjdk
     apt: name=openjdk-8-jre state=latest
-    update_cache: yes
-    become: yes
 
   - name: Copying app file 
-    become: true 
     copy:
         src: /var/lib/jenkins/workspace/final_project/app.jar
         dest: /home/user/
