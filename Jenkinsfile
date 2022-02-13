@@ -58,8 +58,8 @@ pipeline {
           steps{
             checkout scm
             dir ('terraform') {
-				      //sh label: '', script: 'terraform apply -auto-approve'
-			   	    sh label: '', script: 'terraform destroy -auto-approve'
+				      sh label: '', script: 'terraform apply -auto-approve'
+			   	    //sh label: '', script: 'terraform destroy -auto-approve'
 			    
             script {
                 APP_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip").trim()
@@ -86,7 +86,7 @@ pipeline {
           }
         }
       
-        stage('Timeout to start app with message'){
+        stage('Time to start app with message'){
           steps {
             timeout(time: 3, unit: 'MINUTES'){
               sh 'echo timeout 3 min'
