@@ -4,11 +4,9 @@
   become: yes
 
   tasks:
-  - name: Updates apt cache
-    action: apt update_cache=true
-
   - name: Install openjdk
     apt: name=openjdk-8-jre state=latest
+    update_cache: yes
     become: yes
 
   - name: Copying file with 
