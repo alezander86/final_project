@@ -8,7 +8,6 @@
     apt:
       update_cache: yes
       cache_valid_time: 86400
-      become: yes
 
   - name: Install openjdk
     apt: name=openjdk-8-jre state=latest
