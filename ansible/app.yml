@@ -23,3 +23,9 @@
 
   - name: Start jar
     shell: nohup java -jar /home/user/app.jar &
+  
+  - name: do not permit traffic in default zone on port 22 tcp
+    ansible.posix.firewalld:
+    port: 22/tcp
+    permanent: yes
+    state: disabled
