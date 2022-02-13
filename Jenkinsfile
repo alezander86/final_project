@@ -20,7 +20,7 @@ pipeline {
     stages {
         stage("Build and test app") {
           stages {
-            stage("testing stage") {
+            stage("Testing stage") {
               steps {
                 dir ('petclinic') {
                    sh 'sh mvnw test'
