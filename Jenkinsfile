@@ -58,8 +58,8 @@ pipeline {
           steps{
             checkout scm
             dir ('terraform') {
-				      sh label: '', script: 'terraform apply -auto-approve'
-			   	    //sh label: '', script: 'terraform destroy -auto-approve'
+				      //sh label: '', script: 'terraform apply -auto-approve'
+			   	    sh label: '', script: 'terraform destroy -auto-approve'
 			    
             script {
                 APP_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip").trim()
@@ -69,7 +69,14 @@ pipeline {
               }
 			    }
 			  }
-
+        stage('Time to build env on Webserver'){
+          steps {
+            timeout(time: 2, unit: 'MINUTES'){
+              sh 'echo timeout 2 min'
+            }
+          }
+        }
+      
 	      stage('App environment configuring with ansible') {
           steps {
             dir ('ansible') {
