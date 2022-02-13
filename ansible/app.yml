@@ -1,6 +1,5 @@
 ---
 - name: Copy app and starting app
-  sudo: yes
   hosts: app
   become: yes
 
