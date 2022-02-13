@@ -9,7 +9,7 @@
     update_cache: yes
     become: yes
 
-  - name: Copying file with 
+  - name: Copying app file 
     become: true 
     copy:
         src: /var/lib/jenkins/workspace/final_project/app.jar
