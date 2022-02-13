@@ -58,7 +58,7 @@ pipeline {
           steps{
             checkout scm
             dir ('terraform') {
-				        sh label: '', script: 'terraform apply -auto-approve'
+				      sh label: '', script: 'terraform apply -auto-approve'
 			   	    //sh label: '', script: 'terraform destroy -auto-approve'
 			    
             script {
@@ -80,8 +80,8 @@ pipeline {
       
         stage('Timeout to start app with message'){
           steps {
-            timeout(time: 2, unit: 'MINUTES'){
-              sh 'echo timeout 2 min'
+            timeout(time: 3, unit: 'MINUTES'){
+              sh 'echo timeout 3 min'
             }
           }
         }
