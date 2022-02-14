@@ -71,6 +71,9 @@ pipeline {
                   writeFile (file: '../ansible/hosts.txt', text: '[app]\n' + APP_IP)
                 } 
 			        }
+              option {
+                timeout(time: 200, unit 'SECONDS')
+              }
 			      }
           }
         }
