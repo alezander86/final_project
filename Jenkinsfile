@@ -44,7 +44,7 @@ pipeline {
               }
             }
           }
-        */}
+        }*/
         //AWS provider init
         stage('Terraform Init'){
 		      steps{
