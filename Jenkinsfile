@@ -17,9 +17,9 @@ pipeline {
           maven '3.8.4'
 		}
     // 
-    stages {/*
+    stages {
         stage("Build and test app") {
-          stages {
+          stages {/*
             stage("Testing stage") {
               steps {
                 dir ('petclinic') {
