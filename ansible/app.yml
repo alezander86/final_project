@@ -4,17 +4,22 @@
   become: yes
 
   tasks:
+  - name: Update and upgrade apt packages
+    apt:
+      update_cache: yes
+      cache_valid_time: 86400
+
   - name: Install openjdk
     apt: name=openjdk-8-jre state=latest
 
-  - name: Copying app file 
+  - name: Copying file with 
+    become: true 
     copy:
         src: /var/lib/jenkins/workspace/final_project/app.jar
-        dest: /home/ubuntu/
+        dest: /home/user/
 
   - name: Stop jar
-    shell: nohup java -jar /home/ubuntu/app.jar stop &
+    shell: nohup java -jar /home/user/app.jar stop &
 
   - name: Start jar
-    shell: nohup java -jar /home/ubuntu/app.jar &
-  
+    shell: nohup java -jar /home/user/app.jar &
