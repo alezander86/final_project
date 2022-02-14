@@ -18,7 +18,7 @@ pipeline {
 		}
     // 
     stages {
-        stage("Build and test app") {
+        /*stage("Build and test app") {
           stages {
             stage("Testing stage") {
               steps {
@@ -44,7 +44,7 @@ pipeline {
               }
             }
           }
-        }
+        */}
         //AWS provider init
         stage('Terraform Init'){
 		      steps{
