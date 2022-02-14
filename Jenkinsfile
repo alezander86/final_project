@@ -83,13 +83,11 @@ pipeline {
           }
         }
       
-        stage('Time to start app with message'){
-          steps {
-            timeout(time: 3, unit: 'MINUTES'){
-              sh 'echo timeout 3 min'
-            }
+        timeout(20) {
+          node {
+          sh 'foo'
           }
-        }
+        }        
       }
 
        
