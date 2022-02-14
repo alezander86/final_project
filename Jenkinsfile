@@ -72,7 +72,7 @@ pipeline {
                 } 
 			        }
               option {
-                timeout(time: 200, unit 'SECONDS')
+                timeout(time: 200, unit: 'SECONDS')
               }
 			      }
           }
