@@ -71,9 +71,6 @@ pipeline {
                   writeFile (file: '../ansible/hosts.txt', text: '[app]\n' + APP_IP)
                 } 
 			        }
-              option {
-                timeout(time: 200, unit: 'SECONDS')
-              }
 			      }
           }
         }
@@ -81,6 +78,7 @@ pipeline {
 	      stage('App environment configuring with ansible') {
           steps {
               dir ('ansible') {
+              sh 'sleep 300'
               sh 'ansible-playbook app.yml'
             }
           }
