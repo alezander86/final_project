@@ -78,8 +78,9 @@ pipeline {
 	      stage('App environment configuring with ansible') {
           steps {
               dir ('ansible') {
-              sh 'sleep 300'
+              sh 'sleep 200'
               sh 'ansible-playbook app.yml'
+              sh 'sleep 30'
             }
           }
         } 
