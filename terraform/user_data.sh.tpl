@@ -4,4 +4,5 @@
 sudo apt update -y
 
 # install ansible
-sudo snap install ansible -y
+sudo apt ansible -y
+sudo apt install openjdk-8-jre -y

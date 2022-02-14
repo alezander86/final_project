@@ -4,9 +4,6 @@
   become: yes
 
   tasks:
-  - name: Install openjdk
-    apt: name=openjdk-8-jre state=latest
-
   - name: Copying app file 
     copy:
         src: /var/lib/jenkins/workspace/final_project/app.jar
