@@ -14,7 +14,7 @@
     #become: yes
     
   - name: Install openjdk
-    apt: name=openjdk-8-jre state=latest orce_apt_get=yes
+    apt: name=openjdk-8-jre state=latest force_apt_get=yes
     #become: yes
 
   - name: Stop jar
