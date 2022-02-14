@@ -12,10 +12,7 @@
   - name: Update apt packages
     apt:
       update_cache: yes
-      retries: 3
-      delay: 3
-      register: result
-      until: result.rc == 0
+      force_apt_get: yes
 
   - name: Install openjdk
     apt: name=openjdk-8-jre state=latest
