@@ -7,11 +7,11 @@
   - name: Copying app file 
     copy:
         src: /var/lib/jenkins/workspace/final_project/app.jar
-        dest: /home/user/
+        dest: /home/ubuntu/
 
   - name: Stop jar
-    shell: nohup java -jar /home/user/app.jar stop &
+    shell: nohup java -jar /home/ubuntu/app.jar stop &
 
   - name: Start jar
-    shell: nohup java -jar /home/user/app.jar &
+    shell: nohup java -jar /home/ubuntu/app.jar &
   
