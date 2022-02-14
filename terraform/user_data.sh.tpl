@@ -6,4 +6,5 @@ sudo apt upgrade -y
 
 # install ansible
 sudo apt python3 -y
-sudo apt ansible -y
+sudo apt python3-pip -y
+sudo pip3 install ansible -y
