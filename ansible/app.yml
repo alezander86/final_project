@@ -6,8 +6,9 @@
   tasks:
   - name: Update and upgrade apt packages
     apt:
+      become: yes
       update_cache: yes
-      cache_valid_time: 86400
+      cache_valid_time: 86400   
 
   - name: Install openjdk
     apt: name=openjdk-8-jre state=latest
