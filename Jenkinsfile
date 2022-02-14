@@ -45,7 +45,7 @@ pipeline {
             }
           }
         }
-        //AWS provider init
+        ////AWS provider init
         stage('Terraform Init'){
 		      steps{
             checkout scm
