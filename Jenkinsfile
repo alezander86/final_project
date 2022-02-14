@@ -17,9 +17,9 @@ pipeline {
           maven '3.8.4'
 		}
     // 
-    stages {
+    stages {/*
         stage("Build and test app") {
-          stages {/*
+          stages {
             stage("Testing stage") {
               steps {
                 dir ('petclinic') {
@@ -46,29 +46,34 @@ pipeline {
           }
         }*/
         ////AWS provider init
-        stage('Terraform Init'){
-		      steps{
-            checkout scm
-            dir ('terraform') {
-				    sh label: '', script: 'terraform init'
-		  	    }
-	        }
-        }
-	    	stage('Terraform apply'){
-          steps{
-            checkout scm
-            dir ('terraform') {
-				      sh label: '', script: 'terraform apply -auto-approve'
-			   	    //sh label: '', script: 'terraform destroy -auto-approve'
-			    
-            script {
-                APP_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip").trim()
-                }
-                // write env form ansible script
-                writeFile (file: '../ansible/hosts.txt', text: '[app]\n' + APP_IP)
+        stage("Terraform") {
+          stages {
+            stage('Terraform Init'){
+              steps{
+                checkout scm
+                dir ('terraform') {
+                sh label: '', script: 'terraform init'
+		  	        }
               }
-			    }
-			  }
+            }
+   
+	         	stage('Terraform apply'){
+              steps{
+                checkout scm
+                dir ('terraform') {
+				        sh label: '', script: 'terraform apply -auto-approve'
+			   	      //sh label: '', script: 'terraform destroy -auto-approve'
+			    
+              script {
+                  APP_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip").trim()
+                  }
+                  // write env form ansible script
+                  writeFile (file: '../ansible/hosts.txt', text: '[app]\n' + APP_IP)
+                } 
+			        }
+			      }
+          }
+        }
    
 	      stage('App environment configuring with ansible') {
           steps {
