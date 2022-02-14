@@ -20,7 +20,7 @@ resource "aws_instance" "ubuntu_webserver" {
   tags = {
     Name = "app webserver"
   }
-
+# start env before destroy old env
   lifecycle {
     create_before_destroy = true
   }
