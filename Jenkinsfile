@@ -17,7 +17,7 @@ pipeline {
           maven '3.8.4'
 		}
     // 
-    stages {/*
+    stages {
         stage("Build and test app") {
           stages {
             stage("Testing stage") {
@@ -44,7 +44,7 @@ pipeline {
               }
             }
           }
-        }*/
+        }
         ////AWS provider init
         stage("Terraform") {
           stages {
