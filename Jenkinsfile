@@ -81,13 +81,7 @@ pipeline {
               sh 'ansible-playbook app.yml'
             }
           }
-        }
-      
-        timeout(20) {
-          node {
-          sh 'foo'
-          }
-        }        
+        } 
       }
 
        
