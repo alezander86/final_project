@@ -24,7 +24,7 @@ pipeline {
           //docker 'docker_20.10.11'
 		}
     // 
-    stages {
+    stages {/*
         stage("Build and test app") {
           stages {
             stage("Testing stage") {
@@ -63,10 +63,10 @@ pipeline {
             }
           }
         }
-
+        */
         stage('Docker Login by token') {
               steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker -u $DOCKERHUB_CREDENTIALS_USR --password-sdin'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-sdin'
           }
         }
 
