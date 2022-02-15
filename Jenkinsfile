@@ -23,7 +23,7 @@ pipeline {
           //docker 'docker_20.10.11'
 		}
     // 
-    stages {/*
+    stages {
         stage("Build and test app") {
           stages {
             stage("Testing stage") {
@@ -42,7 +42,7 @@ pipeline {
                 }
                 dir ('.') {
                    echo "Copying artifact to root folder"
-                   sh 'cp petclinic/target/*.jar app.jar'
+                   sh 'cp petclinic/target/*.jar docker/app.jar'
                    echo "Archiving artifact"
                    archiveArtifacts(artifacts: 'petclinic/target/*.jar')
                    archiveArtifacts(artifacts: 'petclinic/target/site/surefire-report.html')
@@ -50,7 +50,7 @@ pipeline {
               }
             }
           }
-        }*/
+        }
         ////AWS provider init
         stage('Docker build') {
               steps {
