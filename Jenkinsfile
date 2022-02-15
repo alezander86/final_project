@@ -5,7 +5,7 @@ pipeline {
         IMAGE_NAME = "${env.IMAGE_BASE}:${env.IMAGE_TAG}"
         IMAGE_NAME_LATEST = "${env.IMAGE_BASE}:latest"
         DOCKERFILE_NAME = "docker/Dockerfile"
-        DOCKERHUB_CREDENTIALS=credentials('taruraiev-dockerhub')
+        DOCKERHUB_CREDENTIALS = credentials('taruraiev-dockerhub')
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         APP_IP = ''
@@ -66,7 +66,7 @@ pipeline {
         */
         stage('Docker Login by token') {
               steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-sdin'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
           }
         }
 
