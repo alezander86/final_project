@@ -20,8 +20,9 @@ pipeline {
 	  tools {
           terraform 'terraform_1.1.4'
           maven 'maven_3.8.4'
+          docker 'docker_20.10.11'
 		}
-    // 
+    /// 
     stages {/*
         stage("Build and test app") {
           stages {
