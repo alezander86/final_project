@@ -62,18 +62,13 @@ pipeline {
 
         stage('Docker Push') {
               steps {
-                script {
-                  docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push("$IMAGE_NAME")
-                      dockerImage.push('latest')
-              }
-            }
+                sh 'docker push ${IMAGE_NAME_LATEST}'
           }
         }
 
         stage('Docker remove image') {
               steps {
-                sh "docker rmi ${IMAGE_NAME}"
+                sh "docker rmi ${IMAGE_NAME_LATEST}"
                 sh "docker image prune -a -f"
                 sh "docker system prune -a"
           }
