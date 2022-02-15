@@ -56,7 +56,7 @@ pipeline {
               steps {
                 script {
                   def dockerImage = docker.build("${IMAGE_NAME}", "-f ${DOCKERFILE_NAME} .") 
-                  docker.withRegistry('', 'dockerhub_taruraiev') {
+                  //docker.withRegistry('', 'dockerhub_taruraiev') {
                   echo "Docker image name ${IMAGE_NAME}"
                 }
               }
