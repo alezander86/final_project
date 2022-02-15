@@ -55,9 +55,7 @@ pipeline {
               steps {
                 script {
                   def dockerImage = docker.build("${IMAGE_NAME}", "-f ${DOCKERFILE_NAME} .") 
-                  //docker.withRegistry('', 'dockerhub_taruraiev') {
                   echo "Docker image name ${IMAGE_NAME}"
-                //}
             }
           }
         }
@@ -72,6 +70,14 @@ pipeline {
         stage('Docker Push') {
               steps {
                 sh 'docker push ${IMAGE_NAME}'  
+          }
+        }
+
+        stage('Docker remove image') {
+              steps {
+                sh "docker rmi ${IMAGE_NAME} ${IMAGE_NAME_LATEST}"
+                sh "docker image prune -a -f"
+                sh "docker system prune -a"
           }
         }
 
