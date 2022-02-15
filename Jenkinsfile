@@ -1,6 +1,6 @@
 pipeline {
 	 environment {
-        IMAGE_BASE = 'taruraiev/pet_clinic'
+        IMAGE_BASE = 'taruraiev/pet-clinic'
         IMAGE_TAG = "v$BUILD_NUMBER"
         IMAGE_NAME = "${env.IMAGE_BASE}:${env.IMAGE_TAG}"
         IMAGE_NAME_LATEST = "${env.IMAGE_BASE}:latest"
@@ -62,7 +62,7 @@ pipeline {
 
         stage('Docker Push') {
               steps {
-                sh 'docker push ${IMAGE_NAME}'  
+                sh 'docker push ${IMAGE_NAME}:latest'  
           }
         }
 
