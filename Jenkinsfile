@@ -47,7 +47,7 @@ pipeline {
         stage('Docker Build') {
               steps {
                 script {
-                  def dockerImage = docker.build("${IMAGE_NAME}", "-f ${DOCKERFILE_NAME} .") 
+                  def dockerImage = docker.build("${IMAGE_NAME_LATEST}", "-f ${DOCKERFILE_NAME} .") 
                   echo "Docker image name ${IMAGE_NAME}"
                   echo "Docker image name ${IMAGE_NAME_LATEST}"
             }
