@@ -15,7 +15,7 @@ pipeline {
           terraform 'terraform_1.1.4'
           maven 'maven_3.8.4'
 		}
-    stages {
+    stages {/*
         stage("Build and test app") {
           stages {
             stage("Testing stage") {
@@ -43,7 +43,7 @@ pipeline {
             }
           }
         }
-        
+        */
         stage('Docker Build') {
               steps {
                 script {
