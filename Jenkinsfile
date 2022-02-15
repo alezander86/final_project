@@ -75,7 +75,7 @@ pipeline {
 
         stage('Docker remove image') {
               steps {
-                sh "docker rmi ${IMAGE_NAME} ${IMAGE_NAME_LATEST}"
+                sh "docker rmi ${IMAGE_NAME}"
                 sh "docker image prune -a -f"
                 sh "docker system prune -a"
           }
