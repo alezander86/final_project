@@ -18,8 +18,8 @@ pipeline {
     */
     //used tools
 	  tools {
-          terraform 'terraform'
-          maven '3.8.4'
+          terraform 'terraform_1.1.4'
+          maven 'maven_3.8.4'
 		}
     // 
     stages {/*
