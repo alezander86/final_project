@@ -20,7 +20,7 @@ pipeline {
 	  tools {
           terraform 'terraform_1.1.4'
           maven 'maven_3.8.4'
-          dockerTool 'docker_20.10.11'
+          docker 'docker_20.10.11'
 		}
     // 
     stages {/*
