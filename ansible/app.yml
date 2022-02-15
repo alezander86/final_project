@@ -1,6 +1,6 @@
 ---
 - name: Install Docker and Starting app
-  hosts: dev
+  hosts: app
   become: yes
     
   tasks:
