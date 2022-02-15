@@ -64,7 +64,7 @@ pipeline {
               steps {
                 script {
                   docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push("$BUILD_NUMBER")
+                    dockerImage.push("$IMAGE_NAME")
                       dockerImage.push('latest')
               }
             }
@@ -73,7 +73,7 @@ pipeline {
 
         stage('Docker remove image') {
               steps {
-                sh "docker rmi ${IMAGE_NAME_LATEST}"
+                sh "docker rmi ${IMAGE_NAME}"
                 sh "docker image prune -a -f"
                 sh "docker system prune -a"
           }
