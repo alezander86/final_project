@@ -71,11 +71,11 @@ pipeline {
           }
         }
 
-        stage('Docker Push') {
+        /*stage('Docker Push') {
               steps {
                 
           }
-        }
+        }*/
         
 
         stage("Terraform") {
