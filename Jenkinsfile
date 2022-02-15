@@ -5,6 +5,7 @@ pipeline {
         IMAGE_NAME = "${env.IMAGE_BASE}:${env.IMAGE_TAG}"
         IMAGE_NAME_LATEST = "${env.IMAGE_BASE}:latest"
         DOCKERFILE_NAME = "docker/Dockerfile"
+        $DOCKERHUB_CREDENTIALS=credentials('taruraiev-dockerhub')
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         APP_IP = ''
@@ -51,17 +52,30 @@ pipeline {
             }
           }
         }
-        ////AWS provider init
-        stage('Docker build') {
+        
+        stage('Docker Build') {
               steps {
                 script {
                   def dockerImage = docker.build("${IMAGE_NAME}", "-f ${DOCKERFILE_NAME} .") 
                   //docker.withRegistry('', 'dockerhub_taruraiev') {
                   echo "Docker image name ${IMAGE_NAME}"
                 //}
-              }
             }
-          } 
+          }
+        }
+
+        stage('Docker Login by token') {
+              steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker -u $DOCKERHUB_CREDENTIALS_USR --password-sdin'
+          }
+        }
+
+        stage('Docker Push') {
+              steps {
+                sh 'docker push ${IMAGE_NAME}'
+          }
+        }
+        
 
         stage("Terraform") {
           stages {
