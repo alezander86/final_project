@@ -49,6 +49,7 @@ pipeline {
                 script {
                   def dockerImage = docker.build("${IMAGE_NAME}", "-f ${DOCKERFILE_NAME} .") 
                   echo "Docker image name ${IMAGE_NAME}"
+                  echo "Docker image name ${IMAGE_NAME_LATEST}"
             }
           }
         }
