@@ -1,10 +1,10 @@
 pipeline {
 	 environment {
-        /*IMAGE_BASE = 'taruraiev/pet-clinic'
+        IMAGE_BASE = 'taruraiev/pet-clinic'
         IMAGE_TAG = "v$BUILD_NUMBER"
         IMAGE_NAME = "${env.IMAGE_BASE}:${env.IMAGE_TAG}"
         IMAGE_NAME_LATEST = "${env.IMAGE_BASE}:latest"
-        */DOCKERFILE_NAME = "docker/Dockerfile"
+        DOCKERFILE_NAME = "docker/Dockerfile"
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         APP_IP = ''
@@ -51,7 +51,7 @@ pipeline {
           }
         }*/
         ////AWS provider init
-        /*stage('Docker build') {
+        stage('Docker build') {
               steps {
                 script {
                   def dockerImage = docker.build("${IMAGE_NAME}", "-f ${DOCKERFILE_NAME} .") {
@@ -59,7 +59,7 @@ pipeline {
                 }
               }
             }
-          }*/ 
+          } 
 
         stage("Terraform") {
           stages {
