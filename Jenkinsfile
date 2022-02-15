@@ -1,6 +1,6 @@
 pipeline {
 	 environment {
-        IMAGE_BASE = 'taruraiev/pet-clinic'
+        IMAGE_BASE = 'taruraiev/pet_clinic'
         IMAGE_TAG = "v$BUILD_NUMBER"
         IMAGE_NAME = "${env.IMAGE_BASE}:${env.IMAGE_TAG}"
         IMAGE_NAME_LATEST = "${env.IMAGE_BASE}:latest"
@@ -10,14 +10,7 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         APP_IP = ''
     }
-    agent any  /*{
-        docker {
-            image 'maven'
-            args '-v $HOME:/home'
-            } 
-        }
-    */
-    //used tools
+    agent any  
 	  tools {
           terraform 'terraform_1.1.4'
           maven 'maven_3.8.4'
