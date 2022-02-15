@@ -1,6 +1,6 @@
 pipeline {
 	 environment {
-        IMAGE_BASE = 'Taruraiev/pet-clinic'
+        IMAGE_BASE = 'taruraiev/pet-clinic'
         IMAGE_TAG = "v$BUILD_NUMBER"
         IMAGE_NAME = "${env.IMAGE_BASE}:${env.IMAGE_TAG}"
         IMAGE_NAME_LATEST = "${env.IMAGE_BASE}:latest"
@@ -59,7 +59,8 @@ pipeline {
                 }
               }
             }
-          }  
+          } 
+
         stage("Terraform") {
           stages {
             stage('Terraform Init'){
