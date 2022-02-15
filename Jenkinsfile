@@ -1,5 +1,10 @@
 pipeline {
 	 environment {
+        IMAGE_BASE = 'Taruraiev/pet-clinic'
+        IMAGE_TAG = "v$BUILD_NUMBER"
+        IMAGE_NAME = "${env.IMAGE_BASE}:${env.IMAGE_TAG}"
+        IMAGE_NAME_LATEST = "${env.IMAGE_BASE}:latest"
+        DOCKERFILE_NAME = "docker/Dockerfile"
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         APP_IP = ''
@@ -17,7 +22,7 @@ pipeline {
           maven '3.8.4'
 		}
     // 
-    stages {
+    stages {/*
         stage("Build and test app") {
           stages {
             stage("Testing stage") {
@@ -44,8 +49,17 @@ pipeline {
               }
             }
           }
-        }
+        }*/
         ////AWS provider init
+        stage('Docker build') {
+              steps {
+                script {
+                  def dockerImage = docker.build("${IMAGE_NAME}", "-f ${DOCKERFILE_NAME} .") {
+                  echo "Docker image name ${IMAGE_NAME}"
+                }
+              }
+            }
+          }  
         stage("Terraform") {
           stages {
             stage('Terraform Init'){
