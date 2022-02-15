@@ -21,5 +21,16 @@
         state: present
         update_cache: True
 
+  - name: Get a list of all running containers
+    docker_host_info:
+        containers: True
+    register: docker_info
+    
+  - name: Stop all running containers
+    docker_container:
+        name: '{{ item.Names[0] | regex_replace("^/", "") }}'
+        state: stopped
+    loop: '{{ docker_info.containers }}'
+
   - name: Start a container
     command: "docker run -d --rm -p 8080:8080 taruraiev/petclinic:latest"
