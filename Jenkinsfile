@@ -96,7 +96,7 @@ pipeline {
               script {
                   APP_IP = sh(returnStdout: true, script: "terraform output -raw Webserver_public_ip").trim()
                   }
-                  /// write env form ansible script
+                  // write env form ansible script
                   writeFile (file: '../ansible/hosts.txt', text: '[app]\n' + APP_IP)
                 } 
 			        }
@@ -107,7 +107,9 @@ pipeline {
 	      stage('App environment configuring with ansible') {
           steps {
               dir ('ansible') {
+              sh 'sleep 120'
               sh 'ansible-playbook app.yml'
+              sh 'sleep 30'
             }
           }
         } 
